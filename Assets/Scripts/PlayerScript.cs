@@ -26,7 +26,7 @@ public class PlayerScript : MonoBehaviour
     [Header("References")]
     private Rigidbody _rb;
     [SerializeField] public GameObject WeaponCollider;
-    [SerializeField] public MonsterScript currentMonster;
+    public EnemyManager currentMonster;
     
 
 
@@ -135,13 +135,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (currentMonster !=null)
         {
-            currentMonster.monsterOnDamage(weaponDamage);
+            currentMonster.MonsterOnDamage(weaponDamage);
             currentMonster = null;
         }
-        
-        
     }
-
-
-
 }

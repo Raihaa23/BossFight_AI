@@ -19,10 +19,13 @@ public class MonsterChaseState : StateMachineBehaviour
    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
    {
         agent.destination = player.position;
-		if (agent.remainingDistance < 1) {
-            animator.SetBool("isMeleeAttacking", true);
+        float distance = Vector3.Distance(player.position, animator.transform.position);
+        if (distance < 8)
+        {
+            animator.SetBool("isRangeAttacking", true);
+            animator.SetBool("isMeleeAttacking", false);
             animator.SetBool("isChasing", false);
-		}
+        }
    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

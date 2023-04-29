@@ -6,19 +6,30 @@ public class MonsterMeleeState : StateMachineBehaviour
 {
 
     EnemyManager em;
+    Transform player;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) 
     {
         em = animator.GetComponent<EnemyManager>();
+        player = GameObject.FindGameObjectWithTag("player").transform;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-		if (em.meleeCounter == 3) 
+        float distance = Vector3.Distance(player.position, animator.transform.position);
+        if (distance >= 8)
         {
+            animator.SetBool("isRangeAttacking", true);
+            animator.SetBool("isMeleeAttacking", false);
+            animator.SetBool("isChasing", false);
+        }
+		if (em.meleeCounter == 3)
+        {
+            em.meleeCounter = 0;
+            animator.SetBool("isMeleeAttacking", false);
             animator.SetBool("isHeavyAttacking", true);
-		}
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

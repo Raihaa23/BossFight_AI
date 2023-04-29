@@ -17,6 +17,8 @@ public class MonsterHeavyAttackState : StateMachineBehaviour
     {
 		if (heavyAttack.heavyCounter == 1) {
             heavyAttack.heavyCounter = 0;
+            animator.SetBool("isMeleeAttacking", true);
+            animator.SetBool("isHeavyAttacking", false);
 		}
     }
 

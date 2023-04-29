@@ -11,10 +11,8 @@ public class WeaponScript : MonoBehaviour
     {
         if (other.CompareTag("Monster"))
         {
-
-            player.currentMonster = other.GetComponent<MonsterScript>();
+            player.currentMonster = other.GetComponent<EnemyManager>();
             player.canDamageEnemy = true;
-
         }
     }
 }
